@@ -28,7 +28,7 @@ export default function Footer() {
       <div className="copyright">
         <span className="big">Dave.</span>© {year} · Milwaukee, WI
         <br />
-        Built in public with opinions.
+        Next.js · Tailwind · Vercel
       </div>
     </footer>
   )
