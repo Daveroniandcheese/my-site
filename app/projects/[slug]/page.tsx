@@ -9,8 +9,13 @@ export async function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }))
 }
 
-export function generateMetadata({ params }) {
-  let project = getProjects().find((p) => p.slug === params.slug)
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+  let project = getProjects().find((p) => p.slug === slug)
   if (!project) return
 
   let {
@@ -43,8 +48,13 @@ export function generateMetadata({ params }) {
   }
 }
 
-export default function Project({ params }) {
-  let project = getProjects().find((p) => p.slug === params.slug)
+export default async function Project({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+  let project = getProjects().find((p) => p.slug === slug)
   if (!project) notFound()
 
   return (

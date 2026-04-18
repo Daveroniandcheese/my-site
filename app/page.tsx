@@ -7,12 +7,13 @@ export default function Page() {
       <h1 className="mb-8 text-2xl font-semibold tracking-tighter">
         Dave {/* TODO: your name or how you want to be known */}
       </h1>
+      {/* TODO: rewrite this bio. 2–4 sentences. Who you are, what you work
+          on, what you think about. Milwaukee context optional. */}
       <p className="mb-4">
-        {/* TODO: rewrite this bio. 2–4 sentences. Who you are, what you work
-            on, what you think about. Milwaukee context optional. */}
-        {`I'm a designer and developer in Milwaukee working at the intersection
-        of ecommerce UX, SEO, and the occasional side project. I write here
-        about the web, food, and whatever I'm currently overthinking.`}
+        I&apos;m a designer and developer in Milwaukee working at the
+        intersection of ecommerce UX, SEO, and the occasional side project. I
+        write here about the web, food, and whatever I&apos;m currently
+        overthinking.
       </p>
 
       <div className="my-12">

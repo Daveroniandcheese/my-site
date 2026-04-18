@@ -15,12 +15,14 @@ function ArrowIcon() {
   )
 }
 
-// TODO: fill in your real links. Delete any rows you don't want.
 const footerLinks = [
   { label: 'rss', href: '/rss' },
-  { label: 'github', href: 'https://github.com/YOUR_USERNAME' },
-  { label: 'linkedin', href: 'https://www.linkedin.com/in/YOUR_USERNAME' },
-  { label: 'email', href: 'mailto:you@yourdomain.com' },
+  { label: 'github', href: 'https://github.com/Daveroniandcheese' },
+  {
+    label: 'linkedin',
+    href: 'https://www.linkedin.com/in/david-willey-1062043b/',
+  },
+  { label: 'email', href: 'mailto:davidmaxwilley@gmail.com' },
 ]
 
 export default function Footer() {

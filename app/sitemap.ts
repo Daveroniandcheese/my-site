@@ -1,8 +1,7 @@
 import { getBlogPosts } from 'app/blog/utils'
 import { getProjects } from 'app/projects/utils'
 
-// TODO: replace with your real domain before deploying (no trailing slash)
-export const baseUrl = 'https://yourdomain.com'
+export const baseUrl = 'https://davidmaxwilley.com'
 
 export default async function sitemap() {
   let blogs = getBlogPosts().map((post) => ({
