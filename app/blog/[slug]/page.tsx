@@ -1,6 +1,7 @@
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { CustomMDX } from 'app/components/mdx'
-import { formatDate, getBlogPosts } from 'app/blog/utils'
+import { formatDate, getBlogPosts, readTime } from 'app/blog/utils'
 import { baseUrl } from 'app/sitemap'
 
 export async function generateStaticParams() {
@@ -68,8 +69,10 @@ export default async function Blog({
     notFound()
   }
 
+  const rt = readTime(post.content)
+
   return (
-    <section>
+    <section className="band" style={{ borderTop: 0, paddingTop: 0 }}>
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -92,14 +95,39 @@ export default async function Blog({
           }),
         }}
       />
-      <h1 className="title font-semibold text-2xl tracking-tighter">
+      <Link
+        href="/blog"
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 6,
+          fontFamily: 'var(--ff-mono)',
+          fontSize: 12,
+          color: 'var(--ink-faint)',
+          marginBottom: 24,
+          letterSpacing: '0.06em',
+          textTransform: 'uppercase',
+        }}
+      >
+        ↗ Back to writing
+      </Link>
+      <div className="eyebrow" style={{ marginBottom: 8 }}>
+        {formatDate(post.metadata.publishedAt).toUpperCase()} · {rt}
+      </div>
+      <h1
+        className="title"
+        style={{
+          fontFamily: 'var(--ff-display)',
+          fontSize: 36,
+          fontWeight: 500,
+          letterSpacing: '-0.03em',
+          lineHeight: 1.1,
+          color: 'var(--ink)',
+          margin: '8px 0 24px',
+        }}
+      >
         {post.metadata.title}
       </h1>
-      <div className="flex justify-between items-center mt-2 mb-8 text-sm">
-        <p className="text-sm text-neutral-600 dark:text-neutral-400">
-          {formatDate(post.metadata.publishedAt)}
-        </p>
-      </div>
       <article className="prose">
         <CustomMDX source={post.content} />
       </article>

@@ -1,19 +1,37 @@
 import './global.css'
 import type { Metadata } from 'next'
-import { GeistSans } from 'geist/font/sans'
-import { GeistMono } from 'geist/font/mono'
-import { Navbar } from './components/nav'
+import { Inter, JetBrains_Mono, Fraunces } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
-import Footer from './components/footer'
-import ClarityAnalytics from './components/clarity'
 import { baseUrl } from './sitemap'
+import ClarityAnalytics from './components/clarity'
+import TopMeta from './components/top-meta'
+import { Navbar } from './components/nav'
+import Footer from './components/footer'
+import Cursor from './components/cursor'
+import Peek from './components/peek'
+import Reveal from './components/reveal'
 
-// TODO: update these strings — title template, description, siteName.
-// Once set, Next.js inherits them across every page unless overridden.
-const SITE_NAME = 'Dave' // e.g. "Dave Lastname" or "Dave's Site"
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
+const mono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains-mono',
+  display: 'swap',
+})
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  variable: '--font-fraunces',
+  axes: ['opsz'],
+  display: 'swap',
+})
+
+const SITE_NAME = 'Dave Willey'
 const SITE_DESCRIPTION =
-  'Writing and projects on web, design, and whatever else.'
+  'Designer and developer in Milwaukee. Ecommerce UX, SEO, and the occasional side project.'
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -43,8 +61,6 @@ export const metadata: Metadata = {
   },
 }
 
-const cx = (...classes) => classes.filter(Boolean).join(' ')
-
 export default function RootLayout({
   children,
 }: {
@@ -53,21 +69,21 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cx(
-        'text-black bg-white dark:text-white dark:bg-black',
-        GeistSans.variable,
-        GeistMono.variable
-      )}
+      className={`${inter.variable} ${mono.variable} ${fraunces.variable}`}
     >
-      <body className="antialiased max-w-xl mx-4 mt-8 lg:mx-auto">
-        <main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0">
-          <Navbar />
+      <body>
+        <Cursor />
+        <Peek />
+        <Reveal />
+        <Navbar />
+        <div className="site">
+          <TopMeta />
           {children}
           <Footer />
-          <Analytics />
-          <SpeedInsights />
-          <ClarityAnalytics />
-        </main>
+        </div>
+        <Analytics />
+        <SpeedInsights />
+        <ClarityAnalytics />
       </body>
     </html>
   )

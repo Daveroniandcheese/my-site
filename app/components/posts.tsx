@@ -1,36 +1,45 @@
 import Link from 'next/link'
-import { formatDate, getBlogPosts } from 'app/blog/utils'
+import { getBlogPosts, readTime } from 'app/blog/utils'
 
-export function BlogPosts() {
-  let allBlogs = getBlogPosts()
+function formatShortDate(date: string) {
+  const d = new Date(date.includes('T') ? date : `${date}T00:00:00`)
+  return new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    day: '2-digit',
+    year: 'numeric',
+  })
+    .format(d)
+    .toUpperCase()
+}
+
+export function BlogPosts({ limit }: { limit?: number } = {}) {
+  let posts = getBlogPosts().sort((a, b) =>
+    new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt) ? -1 : 1
+  )
+  if (limit) posts = posts.slice(0, limit)
 
   return (
-    <div>
-      {allBlogs
-        .sort((a, b) => {
-          if (
-            new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)
-          ) {
-            return -1
-          }
-          return 1
-        })
-        .map((post) => (
+    <div className="writing-list in-view">
+      {posts.map((post, i) => {
+        const date = formatShortDate(post.metadata.publishedAt)
+        const rt = readTime(post.content)
+        return (
           <Link
             key={post.slug}
-            className="flex flex-col space-y-1 mb-4"
             href={`/blog/${post.slug}`}
+            className="post-row"
+            data-peek
+            data-peek-title={post.metadata.title}
+            data-peek-meta={`${date} · ${rt.replace(' READ', '')}`}
           >
-            <div className="w-full flex flex-col md:flex-row space-x-0 md:space-x-2">
-              <p className="text-neutral-600 dark:text-neutral-400 w-[100px] tabular-nums">
-                {formatDate(post.metadata.publishedAt, false)}
-              </p>
-              <p className="text-neutral-900 dark:text-neutral-100 tracking-tight">
-                {post.metadata.title}
-              </p>
-            </div>
+            <span className="num">{String(i + 1).padStart(3, '0')}</span>
+            <span className="date">{date}</span>
+            <span className="title">{post.metadata.title}</span>
+            <span className="read">{rt}</span>
+            <span className="arrow">↗</span>
           </Link>
-        ))}
+        )
+      })}
     </div>
   )
 }

@@ -1,32 +1,97 @@
+import Link from 'next/link'
 import { BlogPosts } from 'app/components/posts'
 import { Projects } from 'app/components/projects'
+import Eyebrow from 'app/components/eyebrow'
+import SectionHead from 'app/components/section-head'
+import Portrait from 'app/components/portrait'
+import LiveTime from 'app/components/live-time'
 
 export default function Page() {
   return (
-    <section>
-      <h1 className="mb-8 text-2xl font-semibold tracking-tighter">
-        Dave {/* TODO: your name or how you want to be known */}
-      </h1>
-      {/* TODO: rewrite this bio. 2–4 sentences. Who you are, what you work
-          on, what you think about. Milwaukee context optional. */}
-      <p className="mb-4">
-        I&apos;m a designer and developer in Milwaukee working at the
-        intersection of ecommerce UX, SEO, and the occasional side project. I
-        write here about the web, food, and whatever I&apos;m currently
-        overthinking.
-      </p>
+    <>
+      <section className="hero">
+        <div className="hero-text">
+          <div className="stagger">
+            <Eyebrow idx="01">INDEX · MILWAUKEE, WI · EST. 2026</Eyebrow>
+          </div>
 
-      <div className="my-12">
-        <h2 className="mb-4 text-xl font-semibold tracking-tighter">
-          Selected work
-        </h2>
+          <h1>
+            <span className="reveal-line">
+              <span>Designer &amp;</span>
+            </span>
+            <br />
+            <span className="reveal-line">
+              <span>developer</span>
+            </span>{' '}
+            <span className="reveal-line">
+              <span className="italic">making</span>
+            </span>
+            <br />
+            <span className="reveal-line">
+              <span>things for the</span>
+            </span>{' '}
+            <span className="reveal-line">
+              <span className="accent-underline">web.</span>
+            </span>
+          </h1>
+
+          <div className="hero-bio stagger">
+            <p>
+              I work at the intersection of <strong>ecommerce UX</strong>,{' '}
+              <strong>SEO</strong>, and the occasional side project — shipping
+              storefronts that load fast, rank well, and don&apos;t feel like
+              template noise.
+            </p>
+            <p>
+              This is where I write about the web, food, and whatever I&apos;m
+              currently overthinking.
+            </p>
+          </div>
+
+          <div className="hero-meta stagger">
+            <div className="row">
+              <span className="k">NOW</span>
+              <span className="v">Shipping a Shopify rebuild</span>
+            </div>
+            <div className="row">
+              <span className="k">LOC</span>
+              <LiveTime />
+            </div>
+            <div className="row">
+              <span className="k">AVAIL</span>
+              <span className="v">Q3 2026</span>
+            </div>
+          </div>
+        </div>
+
+        <Portrait />
+      </section>
+
+      <section className="band" id="work">
+        <SectionHead
+          idx="02"
+          label="SELECTED WORK"
+          title="Selected work"
+          desc="A few recent builds. Mostly ecommerce, a bit of tooling, the rare unhinged side quest."
+        />
         <Projects limit={3} />
-      </div>
+        <Link href="/projects" className="view-all">
+          All projects <span>↗</span>
+        </Link>
+      </section>
 
-      <div className="my-12">
-        <h2 className="mb-4 text-xl font-semibold tracking-tighter">Writing</h2>
-        <BlogPosts />
-      </div>
-    </section>
+      <section className="band" id="writing">
+        <SectionHead
+          idx="03"
+          label="WRITING"
+          title="Writing"
+          desc="Notes from the build. The web, the kitchen, and whatever I'm currently overthinking."
+        />
+        <BlogPosts limit={4} />
+        <Link href="/blog" className="view-all">
+          Archive <span>↗</span>
+        </Link>
+      </section>
+    </>
   )
 }

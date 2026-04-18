@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { CustomMDX } from 'app/components/mdx'
 import { formatDate } from 'app/blog/utils'
@@ -57,8 +58,16 @@ export default async function Project({
   let project = getProjects().find((p) => p.slug === slug)
   if (!project) notFound()
 
+  const { title, publishedAt, url, tag, year, status } = project.metadata
+  const metaBits = [
+    formatDate(publishedAt).toUpperCase(),
+    tag,
+    year,
+    status,
+  ].filter(Boolean)
+
   return (
-    <section>
+    <section className="band" style={{ borderTop: 0, paddingTop: 0 }}>
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -66,35 +75,58 @@ export default async function Project({
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'CreativeWork',
-            name: project.metadata.title,
-            datePublished: project.metadata.publishedAt,
+            name: title,
+            datePublished: publishedAt,
             description: project.metadata.summary,
             url: `${baseUrl}/projects/${project.slug}`,
           }),
         }}
       />
-      <h1 className="title font-semibold text-2xl tracking-tighter">
-        {project.metadata.title}
-      </h1>
-      <div className="flex justify-between items-center mt-2 mb-8 text-sm">
-        <p className="text-sm text-neutral-600 dark:text-neutral-400">
-          {formatDate(project.metadata.publishedAt)}
-          {project.metadata.url && (
-            <>
-              {' · '}
-              <a
-                href={project.metadata.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline"
-              >
-                visit →
-              </a>
-            </>
-          )}
-        </p>
+      <Link
+        href="/projects"
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 6,
+          fontFamily: 'var(--ff-mono)',
+          fontSize: 12,
+          color: 'var(--ink-faint)',
+          marginBottom: 24,
+          letterSpacing: '0.06em',
+          textTransform: 'uppercase',
+        }}
+      >
+        ↗ Back to work
+      </Link>
+      <div className="eyebrow" style={{ marginBottom: 8 }}>
+        {metaBits.join(' · ')}
       </div>
-      <article className="prose">
+      <h1
+        className="title"
+        style={{
+          fontFamily: 'var(--ff-display)',
+          fontSize: 36,
+          fontWeight: 500,
+          letterSpacing: '-0.03em',
+          lineHeight: 1.1,
+          color: 'var(--ink)',
+          margin: '8px 0 16px',
+        }}
+      >
+        {title}
+      </h1>
+      {url && (
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="view-all"
+          style={{ marginTop: 0, marginBottom: 24 }}
+        >
+          Visit site <span>↗</span>
+        </a>
+      )}
+      <article className="prose" style={{ marginTop: 24 }}>
         <CustomMDX source={project.content} />
       </article>
     </section>

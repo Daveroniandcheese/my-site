@@ -1,14 +1,20 @@
 import { BlogPosts } from 'app/components/posts'
+import SectionHead from 'app/components/section-head'
 
 export const metadata = {
-  title: 'Blog',
-  description: 'Read my blog.',
+  title: 'Writing',
+  description: 'Notes from the build.',
 }
 
 export default function Page() {
   return (
-    <section>
-      <h1 className="font-semibold text-2xl mb-8 tracking-tighter">My Blog</h1>
+    <section className="band" style={{ borderTop: 0, paddingTop: 0 }}>
+      <SectionHead
+        idx="03"
+        label="WRITING / INDEX"
+        title="Writing"
+        desc="Everything I've published here. Notes on the build, the web, the kitchen, and whatever I'm currently overthinking."
+      />
       <BlogPosts />
     </section>
   )
