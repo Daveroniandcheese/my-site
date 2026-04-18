@@ -1,27 +1,48 @@
 ---
-title: 'Hello, world'
-publishedAt: '2026-04-18'
-summary: 'The obligatory first post. Replace this with something real.'
+title: 'What ecommerce gets wrong about page speed'
+publishedAt: '2026-04-14'
+summary: 'Lighthouse scores are not user experience. Here is where most Shopify stores lose people before they even see a product.'
 ---
 
-This is a placeholder post so the build pipeline has something to render. Drop
-a new `.mdx` file into `app/blog/posts/` to publish a post — the file name
-becomes the URL slug, and the frontmatter at the top populates the title,
-date, and summary.
+The instinct is understandable: you run Lighthouse on your store, see a 54, and
+book a sprint to fix it. But Core Web Vitals scores and actual user experience
+have a gap that most optimization work never closes.
 
-## Markdown works
+Here's what I keep seeing.
 
-You can write **bold**, _italic_, and [links](https://example.com) like
-normal. Code blocks get syntax highlighting:
+## The wrong metrics get optimized
 
-```ts
-function greet(name: string) {
-  return `Hello, ${name}`
-}
-```
+Performance budgets almost always target LCP and Total Blocking Time — the numbers
+that show up in audit reports. What they miss: perceived responsiveness on the
+first tap. On mobile, the time between a user touching a product image and seeing
+any visual response is often 400–800ms on stores that score fine in desktop
+Lighthouse. The culprit is almost always a third-party script bundle — review
+widgets, loyalty programs, live chat — that hasn't been deferred because
+"the vendor said it needs to be in the head."
 
-## What to do next
+It doesn't need to be in the head.
 
-1. Delete this file.
-2. Write your first real post as `your-slug.mdx`.
-3. `git commit && git push` — Vercel redeploys automatically.
+## The image problem is almost never the images
+
+Stores over-invest in compression and under-invest in layout shift. CLS is the
+Core Web Vital that most directly maps to the "this site feels janky" sensation
+people describe but can't name. When a product grid reflows as images load — or
+when a sticky header shunts content down on scroll — shoppers lose their place.
+That cognitive interruption costs conversions in ways that file size optimization
+never will.
+
+The fix is usually boring: explicit width and height attributes, aspect-ratio
+placeholders for images, and font-display: swap with a system-font fallback that
+approximately matches the heading metrics. None of this requires a new build tool.
+
+## Speed is table stakes. Trust is the conversion lever.
+
+After enough storefronts to have opinions: speed gets shoppers to the product page;
+trust closes the sale. Social proof placement, return policy visibility, and clear
+shipping timelines matter more than shaving 200ms off your TTFB once you're past
+a reasonable baseline.
+
+Most stores aren't past a reasonable baseline — which is why speed work still
+matters. But it's a floor, not a ceiling. Once you're in the green on CWV, the
+next conversion gain almost always comes from copy, layout, or trust signals.
+That's where the interesting design problems live.

@@ -12,7 +12,7 @@ export default function Page() {
       <section className="hero">
         <div className="hero-text">
           <div className="stagger">
-            <Eyebrow idx="01">INDEX · MILWAUKEE, WI · EST. 2026</Eyebrow>
+            <Eyebrow idx="01">INDEX · MILWAUKEE, WI</Eyebrow>
           </div>
 
           <h1>
@@ -43,8 +43,8 @@ export default function Page() {
               template noise.
             </p>
             <p>
-              This is where I write about the web, food, and whatever I&apos;m
-              currently overthinking.
+              This is where I write about the craft: performance, tooling, and
+              the occasional opinion I can&apos;t shake.
             </p>
           </div>
 
@@ -59,7 +59,15 @@ export default function Page() {
             </div>
             <div className="row">
               <span className="k">AVAIL</span>
-              <span className="v">Q3 2026</span>
+              <span className="v">
+                Q3 2026 —{' '}
+                <a
+                  href="mailto:davidmaxwilley@gmail.com"
+                  className="avail-cta"
+                >
+                  let&apos;s talk
+                </a>
+              </span>
             </div>
           </div>
         </div>
@@ -85,7 +93,7 @@ export default function Page() {
           idx="03"
           label="WRITING"
           title="Writing"
-          desc="Notes from the build. The web, the kitchen, and whatever I'm currently overthinking."
+          desc="Notes from the build. Performance, tooling, and the occasional opinion I can't shake."
         />
         <BlogPosts limit={4} />
         <Link href="/blog" className="view-all">

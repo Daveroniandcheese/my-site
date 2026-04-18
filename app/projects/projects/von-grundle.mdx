@@ -14,12 +14,46 @@ marketing copy on a Shopify storefront.
 
 ## The problem
 
-Short framing of the context and what needed to be solved.
+The existing store ran on a heavily modified commercial theme that had accumulated
+years of app bloat: review widgets, loyalty overlays, a live-chat bubble, and
+a currency converter nobody used. Mobile LCP was sitting at 6.2 seconds. The design
+didn't match the brand at all — Von Grundle's copy is darkly funny and theatrical,
+but the storefront looked like every other generic Shopify dropship template.
+Conversion rate on mobile was roughly half what it was on desktop, which pointed
+squarely at the experience rather than the product.
 
 ## What I built
 
-Bullet points or prose describing the actual work.
+- **Custom Liquid theme from scratch** — no starter, no Dawn fork. Full control
+  over every render path, which meant no dead JS and no unused CSS shipped to the browser.
+- **Dark Victorian design system** — built around a tight type scale (two weights,
+  one serif, nothing extra) and a restricted palette that matched the brand's
+  existing packaging. The aesthetic needed to feel antique without being unreadable.
+- **Metafield-driven product lore** — each product has a short "origin story" field
+  that feeds into a custom section below the fold. Gives the brand personality without
+  requiring a separate CMS integration.
+- **Section/block collection filtering** — faceted filtering without an app dependency.
+  Drops the request count by eliminating a round-trip to a third-party script host.
+- **Structured data for products and breadcrumbs** — JSON-LD on every PDP for
+  rich snippet eligibility. Small lift, measurable impact on click-through rate
+  from organic search over the following quarter.
+
+Post-launch, mobile LCP dropped to 1.8 seconds and the mobile-to-desktop conversion
+gap closed to within 12%.
 
 ## What I learned
 
-The reflection section.
+Building a theme from scratch is almost always worth it if the brand has a strong
+identity. Customizing a starter sounds faster until you spend four hours unraveling
+someone else's JavaScript to understand why a dropdown doesn't close on mobile.
+Starting from zero is slower for the first two days and faster for every day after.
+
+Dark-mode-first design is genuinely harder than it sounds. Contrast ratios shift
+in ways that look fine in Figma and feel wrong on an OLED screen at night. Budget
+extra time for accessibility passes — I ran the site through WCAG 2.1 AA checks
+three times before I was satisfied.
+
+The biggest surprise: organic traffic responded faster than expected to the
+structured data changes. Within six weeks the product listings were showing
+price and availability in Google SERPs. It's not a shortcut, but it's a lever
+most Shopify themes leave on the table.

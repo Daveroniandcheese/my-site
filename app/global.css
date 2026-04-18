@@ -249,7 +249,7 @@ nav.links a.active::before {
 .hero h1 {
   font-family: var(--ff-display);
   font-weight: 500;
-  font-size: clamp(34px, 10vw, 72px);
+  font-size: clamp(26px, 7vw, 72px);
   line-height: 1;
   letter-spacing: -0.04em;
   margin: 8px 0 24px;
@@ -1077,4 +1077,24 @@ pre {
 
 .title {
   text-wrap: balance;
+}
+
+/* ---------- ACCENT UNDERLINE ---------- */
+.accent-underline {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 0.15em;
+  text-decoration-thickness: 2px;
+}
+
+/* ---------- AVAIL CTA LINK ---------- */
+a.avail-cta {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+  transition: opacity 0.2s;
+}
+a.avail-cta:hover {
+  opacity: 0.75;
 }

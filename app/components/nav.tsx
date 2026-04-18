@@ -3,11 +3,10 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-const items: { href: string; label: string; external?: boolean }[] = [
+const items: { href: string; label: string }[] = [
   { href: '/', label: 'index' },
   { href: '/projects', label: 'work' },
   { href: '/blog', label: 'writing' },
-  { href: '/rss', label: 'rss', external: true },
 ]
 
 export function Navbar() {
@@ -17,15 +16,8 @@ export function Navbar() {
 
   return (
     <nav className="links" aria-label="Primary">
-      {items.map(({ href, label, external }) => {
+      {items.map(({ href, label }) => {
         const active = isActive(href) ? 'active' : ''
-        if (external) {
-          return (
-            <a key={href} href={href} className={active} data-no-peek>
-              {label}
-            </a>
-          )
-        }
         return (
           <Link key={href} href={href} className={active}>
             {label}

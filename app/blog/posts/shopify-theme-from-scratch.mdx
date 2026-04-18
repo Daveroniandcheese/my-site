@@ -1,0 +1,52 @@
+---
+title: 'The case for building your own Shopify theme'
+publishedAt: '2026-04-08'
+summary: 'Every project that starts with "we just need to customize Dawn a little" has a second act.'
+---
+
+There is a moment on every Shopify project where someone opens the Dawn source code
+for the first time and goes quiet. Dawn is a well-engineered theme. It is also
+85,000 lines of Liquid, JavaScript, and CSS — most of which you will never need,
+none of which you wrote, and all of which you are now responsible for.
+
+I stopped reaching for starter themes about a year ago. Here's why.
+
+## The customization trap
+
+Every project that starts with "we just need to customize Dawn a little" has a
+second act. The second act is you, three weeks later, tracing an obscure layout
+bug through four layers of inherited section schema to find a hardcoded
+`padding-top` that contradicts your spacing system.
+
+Starter themes optimize for getting a store live fast with no developer involved.
+That is the right tradeoff for a lot of merchants. For a project where the brand
+has a real identity and the UX needs to be intentional, it is often the wrong one.
+
+## What you actually own
+
+When you build from scratch, the codebase is small enough to hold in your head.
+Every file has a reason. The JavaScript does exactly what you wrote it to do.
+
+On a recent project, the theme shipped with 11kb of JavaScript (uncompressed) and
+zero app dependencies for core storefront functionality. Filtering, cart, drawer
+navigation — all custom, all in the repo. Debugging is fast because there are no
+third-party black boxes to rule out first.
+
+There's also a compounding benefit: subsequent projects get faster. The primitives
+you build for one theme — a responsive image macro, a section schema for
+announcement bars, an accessible drawer pattern — port cleanly to the next one.
+
+## The honest tradeoffs
+
+It takes longer upfront. If your client has a hard launch date in three weeks and
+a flexible brand, a starter theme is the right call and you should use it without
+guilt. Custom is a deliberate choice that makes sense when the design is tight,
+the brand is opinionated, or the performance requirements are strict.
+
+It also means you own more. App compatibility issues are on you. The upgrade path
+when Shopify ships new Liquid features requires your attention. There is no
+community forum thread to find when something breaks.
+
+The math still works out, at least for the kind of work I do. But it is worth
+being honest that "starting from scratch" is a tradeoff, not a universal best
+practice.

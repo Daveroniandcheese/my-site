@@ -37,6 +37,9 @@ export default function Peek() {
     const onMove = (e: MouseEvent) => {
       peek.style.left = e.clientX + 'px'
       peek.style.top = e.clientY + 'px'
+      // Hide if cursor has drifted off any peek-enabled element
+      const under = (e.target as HTMLElement | null)?.closest?.('[data-peek]')
+      if (!under) peek.classList.remove('show')
     }
 
     document.addEventListener('mouseover', onOver)
